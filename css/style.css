@@ -94,6 +94,68 @@ button { font-family: inherit; cursor: pointer; }
 .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .nav-toggle.active span:nth-child(2) { opacity: 0; }
 .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
+.search-container {
+  max-width: 600px;
+  margin: 0 auto 30px auto;
+  padding: 0 20px;
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 50px;
+  padding: 10px 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.search-box:focus-within {
+  border-color: #071939; /* Warna navy sesuai tema */
+  box-shadow: 0 6px 20px rgba(7, 25, 57, 0.15);
+}
+
+.search-icon {
+  color: #64748b;
+  font-size: 1.1rem;
+  margin-right: 12px;
+}
+
+.search-box input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: #1e293b;
+  background: transparent;
+}
+
+.clear-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 1rem;
+  display: none; /* Sembunyikan jika kotak kosong */
+  padding: 4px;
+}
+
+.clear-btn:hover {
+  color: #e11d48;
+}
+
+/* Pesan jika destinasi tidak ditemukan */
+.no-results {
+  text-align: center;
+  padding: 4px 20px;
+  color: #64748b;
+  font-size: 1.1rem;
+  width: 100%;
+  grid-column: 1 / -1;
+}
 
 /* ============ HERO ============ */
 .hero {
@@ -577,65 +639,4 @@ button { font-family: inherit; cursor: pointer; }
   .welcome-modal { padding: 28px 20px 24px; }
   .welcome-modal h2 { font-size: 1.1rem; }
   .welcome-icon { width: 56px; height: 56px; font-size: 1.4rem; }
-}
-.search-container {
-  max-width: 600px;
-  margin: 0 auto 30px auto;
-  padding: 0 20px;
-}
-
-.search-box {
-  position: relative;
-  display: flex;
-  align-items: center;
-  background: #ffffff;
-  border: 2px solid #e2e8f0;
-  border-radius: 50px;
-  padding: 10px 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-}
-
-.search-box:focus-within {
-  border-color: #071939; /* Warna navy sesuai tema */
-  box-shadow: 0 6px 20px rgba(7, 25, 57, 0.15);
-}
-
-.search-icon {
-  color: #64748b;
-  font-size: 1.1rem;
-  margin-right: 12px;
-}
-
-.search-box input {
-  width: 100%;
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  color: #1e293b;
-  background: transparent;
-}
-
-.clear-btn {
-  background: none;
-  border: none;
-  color: #94a3b8;
-  cursor: pointer;
-  font-size: 1rem;
-  display: none; /* Sembunyikan jika kotak kosong */
-  padding: 4px;
-}
-
-.clear-btn:hover {
-  color: #e11d48;
-}
-
-/* Pesan jika destinasi tidak ditemukan */
-.no-results {
-  text-align: center;
-  padding: 4px 20px;
-  color: #64748b;
-  font-size: 1.1rem;
-  width: 100%;
-  grid-column: 1 / -1;
 }
