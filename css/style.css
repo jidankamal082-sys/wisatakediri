@@ -95,58 +95,63 @@ button { font-family: inherit; cursor: pointer; }
 .nav-toggle.active span:nth-child(2) { opacity: 0; }
 .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 }
+./* Perbaikan Tampilan Kotak Pencarian agar Lebar dan Rapi */
 .search-container {
+  width: 100%;
   max-width: 600px;
-  margin: 30px auto 30px auto;
-  padding: 0 20px;
+  margin: 20px auto;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
-./* Styling Dropdown Hasil Pencarian */
 .search-box {
   position: relative;
-}
-
-.search-dropdown {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
+  display: flex;
+  align-items: center;
   background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  margin-top: 8px;
-  max-height: 250px;
-  overflow-y: auto;
-  z-index: 1000;
-  border: 1px solid #e2e8f0;
+  border: 2px solid #cbd5e1;
+  border-radius: 50px;
+  padding: 8px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.search-dropdown-item {
-  padding: 12px 18px;
-  cursor: pointer;
-  font-size: 0.95rem;
+.search-box:focus-within {
+  border-color: #1e3a8a;
+  box-shadow: 0 6px 16px rgba(30, 58, 138, 0.15);
+}
+
+.search-icon {
+  color: #64748b;
+  font-size: 1.1rem;
+  margin-right: 12px;
+}
+
+#searchInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
   color: #1e293b;
-  border-bottom: 1px solid #f1f5f9;
-  transition: background-color 0.2s ease;
+  width: 100%;
 }
 
-.search-dropdown-item:last-child {
-  border-bottom: none;
-}
-
-.search-dropdown-item:hover,
-.search-dropdown-item:active {
-  background-color: #f0f4f8;
-  color: #0a2540;
-  font-weight: 600;
-}
-
-.search-dropdown-item.empty {
+.clear-btn {
+  background: transparent;
+  border: none;
   color: #94a3b8;
-  cursor: default;
-  text-align: center;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  display: none;
+  transition: color 0.2s ease;
 }
+
+.clear-btn:hover {
+  color: #1e293b;
+}
+
 
 /* ============ HERO ============ */
 .hero {
