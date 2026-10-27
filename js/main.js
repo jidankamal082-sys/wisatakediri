@@ -106,8 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     
-    const destinationCards = document.querySelectorAll('.kategori-item, .card, .destinasi-card'); // Sesuaikan class kartu di HTML Anda
-    let foundCount = 0;
+    const destinationCards = document.querySelectorAll('.kategori-item, .card, .destinasi-card, .col, [class*="card"], [class*="item"]');
+     
 
     destinationCards.forEach(card => {
       const text = card.textContent.toLowerCase();
