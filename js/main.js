@@ -503,5 +503,55 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('destinasi').scrollIntoView({ behavior: 'smooth' });
     });
   }
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('searchInput');
+  const clearSearchBtn = document.getElementById('clearSearchBtn');
 
+  if (!searchInput) return;
+
+  searchInput.addEventListener('input', (e) => {
+    const keyword = e.target.value.toLowerCase().trim();
+    
+    if (clearSearchBtn) {
+      clearSearchBtn.style.display = keyword.length > 0 ? 'block' : 'none';
+    }
+
+    const destinationCards = document.querySelectorAll('.kategori-item, .card, .destinasi-card'); // Sesuaikan class kartu di HTML Anda
+    let foundCount = 0;
+
+    destinationCards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      if (text.includes(keyword)) {
+        card.style.display = ''; // Tampilkan kartu
+        foundCount++;
+      } else {
+        card.style.display = 'none'; 
+      }
+    });
+
+    let noResultsMsg = document.getElementById('noResultsMsg');
+    const container = document.getElementById('kategoriGrid') || document.querySelector('.kategori-grid');
+
+    if (foundCount === 0 && keyword !== '') {
+      if (!noResultsMsg && container) {
+        noResultsMsg = document.createElement('div');
+        noResultsMsg.id = 'noResultsMsg';
+        noResultsMsg.className = 'no-results';
+        noResultsMsg.innerHTML = `<p>Tidak ditemukan destinasi dengan kata kunci "<strong>${keyword}</strong>"</p>`;
+        container.appendChild(noResultsMsg);
+      }
+    } else if (noResultsMsg) {
+      noResultsMsg.remove();
+    }
+  });
+
+  if (clearSearchBtn) {
+    clearSearchBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      searchInput.dispatchEvent(new Event('input'));
+      searchInput.focus();
+    });
+  }
+});
+   
 });
