@@ -91,23 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-// ============ FITUR PENCARIAN & ENTER FIX ============
+// ============ FITUR PENCARIAN DESTINASI WISATA ============
 document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('searchInput');
   const clearSearchBtn = document.getElementById('clearSearchBtn');
 
   if (!searchInput) return;
-
-  // Mencegah halaman reload saat tombol Enter ditekan di keyboard HP
-  const searchBox = searchInput.closest('div');
-  if (searchBox) {
-    const parentForm = searchBox.closest('form');
-    if (parentForm) {
-      parentForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-      });
-    }
-  }
 
   searchInput.addEventListener('input', (e) => {
     const keyword = e.target.value.toLowerCase().trim();
@@ -116,14 +105,12 @@ document.addEventListener('DOMContentLoaded', () => {
       clearSearchBtn.style.display = keyword.length > 0 ? 'block' : 'none';
     }
 
-    // Menargetkan kartu destinasi di halaman
+    // Mencari semua elemen kartu destinasi di halaman
     const cards = document.querySelectorAll('.destinasi-card, .card, .kategori-item, [class*="card"]');
     let foundCount = 0;
 
     cards.forEach(card => {
-      const titleElement = card.querySelector('h3, h4, .title, .nama-tempat') || card;
-      const text = titleElement.textContent.toLowerCase().trim();
-
+      const text = card.textContent.toLowerCase();
       if (text.includes(keyword)) {
         card.style.display = '';
         foundCount++;
@@ -132,16 +119,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Pesan jika hasil pencarian tidak ditemukan
+    // Menampilkan pesan jika tidak ada hasil
     let noResultsMsg = document.getElementById('noResultsMsg');
-    const container = document.getElementById('destinasiGrid') || document.querySelector('.destinasi-grid') || document.querySelector('.container');
+    const container = document.getElementById('destinasiGrid') || document.querySelector('.container');
 
     if (foundCount === 0 && keyword !== '') {
       if (!noResultsMsg && container) {
         noResultsMsg = document.createElement('div');
         noResultsMsg.id = 'noResultsMsg';
         noResultsMsg.className = 'no-results';
-        noResultsMsg.innerHTML = `<p>Tidak ditemukan destinasi dengan nama "<strong>${keyword}</strong>"</p>`;
+        noResultsMsg.innerHTML = `<p>Tidak ditemukan destinasi dengan kata kunci "<strong>${keyword}</strong>"</p>`;
         container.appendChild(noResultsMsg);
       }
     } else if (noResultsMsg) {
@@ -157,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+   
    
    
   /* --- Fetch and render --- */
