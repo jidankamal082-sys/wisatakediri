@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-// ============ FITUR PENCARIAN KATEGORI & DESTINASI ============
+// ============ FITUR PENCARIAN SPESIFIK BERDASARKAN NAMA ============
 document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('searchInput');
   const clearSearchBtn = document.getElementById('clearSearchBtn');
@@ -105,30 +105,34 @@ document.addEventListener('DOMContentLoaded', () => {
       clearSearchBtn.style.display = keyword.length > 0 ? 'block' : 'none';
     }
 
-    // Menargetkan ikon kategori dan kartu destinasi agar ikut tersaring
-    const items = document.querySelectorAll('.kategori-item, .card, .destinasi-card, [class*="card"], [class*="item"]');
+    // Menargetkan kartu destinasi atau elemen nama tempat
+    const cards = document.querySelectorAll('.destinasi-card, .card, .kategori-item, [class*="card"]');
     let foundCount = 0;
 
-    items.forEach(item => {
-      const text = item.textContent.toLowerCase();
+    cards.forEach(card => {
+      // Mengambil teks utama atau judul di dalam kartu
+      const titleElement = card.querySelector('h3, h4, .title, .nama-tempat') || card;
+      const text = titleElement.textContent.toLowerCase().trim();
+
+      // Cek apakah teks diawali atau mencocokkan kata kunci pencarian
       if (text.includes(keyword)) {
-        item.style.display = '';
+        card.style.display = '';
         foundCount++;
       } else {
-        item.style.display = 'none';
+        card.style.display = 'none';
       }
     });
 
-    // Pesan jika tidak ditemukan
+    // Pesan jika hasil pencarian tidak ditemukan
     let noResultsMsg = document.getElementById('noResultsMsg');
-    const container = document.getElementById('kategoriGrid') || document.querySelector('.kategori-grid') || document.querySelector('.container');
+    const container = document.getElementById('destinasiGrid') || document.querySelector('.destinasi-grid') || document.querySelector('.container');
 
     if (foundCount === 0 && keyword !== '') {
       if (!noResultsMsg && container) {
         noResultsMsg = document.createElement('div');
         noResultsMsg.id = 'noResultsMsg';
         noResultsMsg.className = 'no-results';
-        noResultsMsg.innerHTML = `<p>Tidak ditemukan hasil dengan kata kunci "<strong>${keyword}</strong>"</p>`;
+        noResultsMsg.innerHTML = `<p>Tidak ditemukan destinasi dengan nama "<strong>${keyword}</strong>"</p>`;
         container.appendChild(noResultsMsg);
       }
     } else if (noResultsMsg) {
@@ -144,8 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-   
-   
    
   /* --- Fetch and render --- */
   fetch('js/data-destinasi.json')
