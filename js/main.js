@@ -91,62 +91,104 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-// ============ FITUR PENCARIAN DESTINASI WISATA ============
+/// ============ FITUR AUTOCOMPLETE & SMOOTH SCROLL ============
 document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('searchInput');
   const clearSearchBtn = document.getElementById('clearSearchBtn');
-
+  
   if (!searchInput) return;
 
+  // Buat wadah elemen dropdown saran jika belum ada
+  let searchResults = document.getElementById('searchResults');
+  if (!searchResults) {
+    searchResults = document.createElement('div');
+    searchResults.id = 'searchResults';
+    searchResults.className = 'search-dropdown';
+    searchInput.parentElement.appendChild(searchResults);
+  }
+
+  // Tampilkan daftar saran saat pengguna mengetik
   searchInput.addEventListener('input', (e) => {
     const keyword = e.target.value.toLowerCase().trim();
-    
+    searchResults.innerHTML = '';
+
     if (clearSearchBtn) {
       clearSearchBtn.style.display = keyword.length > 0 ? 'block' : 'none';
     }
 
-    // Mencari semua elemen kartu destinasi di halaman
-    const cards = document.querySelectorAll('.destinasi-card, .card, .kategori-item, [class*="card"]');
-    let foundCount = 0;
+    if (keyword.length === 0) {
+      searchResults.style.display = 'none';
+      return;
+    }
+
+    // Ambil semua kartu destinasi yang ada di halaman
+    const cards = document.querySelectorAll('.destinasi-card, .card, [class*="card"]');
+    let matches = [];
 
     cards.forEach(card => {
-      const text = card.textContent.toLowerCase();
-      if (text.includes(keyword)) {
-        card.style.display = '';
-        foundCount++;
-      } else {
-        card.style.display = 'none';
+      const titleEl = card.querySelector('h3, h4, .title, .nama-tempat') || card;
+      const titleText = titleEl.textContent.trim();
+
+      if (titleText.toLowerCase().includes(keyword)) {
+        matches.push({
+          title: titleText,
+          element: card
+        });
       }
     });
 
-    // Menampilkan pesan jika tidak ada hasil
-    let noResultsMsg = document.getElementById('noResultsMsg');
-    const container = document.getElementById('destinasiGrid') || document.querySelector('.container');
+    if (matches.length > 0) {
+      searchResults.style.display = 'block';
+      matches.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'search-dropdown-item';
+        itemDiv.textContent = item.title;
 
-    if (foundCount === 0 && keyword !== '') {
-      if (!noResultsMsg && container) {
-        noResultsMsg = document.createElement('div');
-        noResultsMsg.id = 'noResultsMsg';
-        noResultsMsg.className = 'no-results';
-        noResultsMsg.innerHTML = `<p>Tidak ditemukan destinasi dengan kata kunci "<strong>${keyword}</strong>"</p>`;
-        container.appendChild(noResultsMsg);
-      }
-    } else if (noResultsMsg) {
-      noResultsMsg.remove();
+        // Ketika opsi diklik, langsung scroll ke lokasi kartu wisata tersebut
+        itemDiv.addEventListener('click', () => {
+          searchInput.value = item.title;
+          searchResults.style.display = 'none';
+          
+          item.element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          });
+
+          // Efek sorotan sementara pada kartu yang dipilih
+          item.element.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+          item.element.style.transform = 'scale(1.03)';
+          item.element.style.boxShadow = '0 0 15px rgba(10, 37, 64, 0.4)';
+          setTimeout(() => {
+            item.element.style.transform = '';
+            item.element.style.boxShadow = '';
+          }, 2000);
+        });
+
+        searchResults.appendChild(itemDiv);
+      });
+    } else {
+      searchResults.style.display = 'block';
+      searchResults.innerHTML = '<div class="search-dropdown-item empty">Tidak ditemukan destinasi</div>';
+    }
+  });
+
+  // Sembunyikan dropdown jika mengklik di luar kotak pencarian
+  document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+      searchResults.style.display = 'none';
     }
   });
 
   if (clearSearchBtn) {
     clearSearchBtn.addEventListener('click', () => {
       searchInput.value = '';
-      searchInput.dispatchEvent(new Event('input'));
+      searchResults.style.display = 'none';
+      clearSearchBtn.style.display = 'none';
       searchInput.focus();
     });
   }
 });
-   
-   
-   
+             
   /* --- Fetch and render --- */
   fetch('js/data-destinasi.json')
     .then(res => {
