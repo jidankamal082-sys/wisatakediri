@@ -91,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
+// ============ FITUR PENCARIAN DESTINASI (VERSI TERBARU) ============
 document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('searchInput');
   const clearSearchBtn = document.getElementById('clearSearchBtn');
@@ -100,27 +101,27 @@ document.addEventListener('DOMContentLoaded', () => {
   searchInput.addEventListener('input', (e) => {
     const keyword = e.target.value.toLowerCase().trim();
     
-    
     if (clearSearchBtn) {
       clearSearchBtn.style.display = keyword.length > 0 ? 'block' : 'none';
     }
 
-    
-    const destinationCards = document.querySelectorAll('.kategori-item, .card, .destinasi-card, .col, [class*="card"], [class*="item"]');
-     
+    // Mencari semua elemen kartu destinasi yang ada di halaman
+    const destinationCards = document.querySelectorAll('.destinasi-card, .card, .kategori-item, [class*="card"]');
+    let foundCount = 0;
 
     destinationCards.forEach(card => {
       const text = card.textContent.toLowerCase();
       if (text.includes(keyword)) {
-        card.style.display = ''; 
+        card.style.display = '';
         foundCount++;
       } else {
-        card.style.display = 'none'; 
+        card.style.display = 'none';
       }
     });
-     
+
+    // Pesan jika tidak ditemukan
     let noResultsMsg = document.getElementById('noResultsMsg');
-    const container = document.getElementById('kategoriGrid') || document.querySelector('.kategori-grid');
+    const container = document.getElementById('destinasiGrid') || document.querySelector('.destinasi-grid') || document.querySelector('.container');
 
     if (foundCount === 0 && keyword !== '') {
       if (!noResultsMsg && container) {
@@ -134,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
       noResultsMsg.remove();
     }
   });
-   
+
   if (clearSearchBtn) {
     clearSearchBtn.addEventListener('click', () => {
       searchInput.value = '';
@@ -143,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+   
    
   /* --- Fetch and render --- */
   fetch('js/data-destinasi.json')
