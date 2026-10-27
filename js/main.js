@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-// ============ FITUR PENCARIAN DESTINASI (VERSI TERBARU) ============
+// ============ FITUR PENCARIAN KATEGORI & DESTINASI ============
 document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('searchInput');
   const clearSearchBtn = document.getElementById('clearSearchBtn');
@@ -105,30 +105,30 @@ document.addEventListener('DOMContentLoaded', () => {
       clearSearchBtn.style.display = keyword.length > 0 ? 'block' : 'none';
     }
 
-    // Mencari semua elemen kartu destinasi yang ada di halaman
-    const destinationCards = document.querySelectorAll('.destinasi-card, .card, .kategori-item, [class*="card"]');
+    // Menargetkan ikon kategori dan kartu destinasi agar ikut tersaring
+    const items = document.querySelectorAll('.kategori-item, .card, .destinasi-card, [class*="card"], [class*="item"]');
     let foundCount = 0;
 
-    destinationCards.forEach(card => {
-      const text = card.textContent.toLowerCase();
+    items.forEach(item => {
+      const text = item.textContent.toLowerCase();
       if (text.includes(keyword)) {
-        card.style.display = '';
+        item.style.display = '';
         foundCount++;
       } else {
-        card.style.display = 'none';
+        item.style.display = 'none';
       }
     });
 
     // Pesan jika tidak ditemukan
     let noResultsMsg = document.getElementById('noResultsMsg');
-    const container = document.getElementById('destinasiGrid') || document.querySelector('.destinasi-grid') || document.querySelector('.container');
+    const container = document.getElementById('kategoriGrid') || document.querySelector('.kategori-grid') || document.querySelector('.container');
 
     if (foundCount === 0 && keyword !== '') {
       if (!noResultsMsg && container) {
         noResultsMsg = document.createElement('div');
         noResultsMsg.id = 'noResultsMsg';
         noResultsMsg.className = 'no-results';
-        noResultsMsg.innerHTML = `<p>Tidak ditemukan destinasi dengan kata kunci "<strong>${keyword}</strong>"</p>`;
+        noResultsMsg.innerHTML = `<p>Tidak ditemukan hasil dengan kata kunci "<strong>${keyword}</strong>"</p>`;
         container.appendChild(noResultsMsg);
       }
     } else if (noResultsMsg) {
@@ -144,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+   
    
    
   /* --- Fetch and render --- */
