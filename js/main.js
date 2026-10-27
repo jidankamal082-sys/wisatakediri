@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-/// ============ FITUR AUTOCOMPLETE & SMOOTH SCROLL ============
+
 document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('searchInput');
   const clearSearchBtn = document.getElementById('clearSearchBtn');
@@ -585,9 +585,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target === welcomeOverlay) closeWelcome();
     });
   }
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && welcomeOverlay && welcomeOverlay.classList.contains('open')) {
-      closeWelcome();
+  
+document.addEventListener('click', (e) => {
+  const detailBtn = e.target.closest('button[data-action="detail"], .btn-detail, a[href="#"], [onclick*="detail"]');
+  if (detailBtn) {
+    e.preventDefault();
+  }
+});
+   
     }
   });
 
