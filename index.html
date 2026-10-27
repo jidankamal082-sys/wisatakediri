@@ -42,7 +42,23 @@
       </div>
     </div>
   </nav>
-
+  
+  <!-- ============ SEARCH SECTION ============ -->
+<div class="search-container" data-aos="fade-up">
+  <div class="search-box">
+    <i class="fas fa-search search-icon" aria-hidden="true"></i>
+    <input 
+      type="text" 
+      id="searchInput" 
+      placeholder="Cari destinasi wisata, tempat bersejarah, kuliner..." 
+      autocomplete="off"
+    >
+    <button type="button" id="clearSearchBtn" class="clear-btn" aria-label="Hapus pencarian">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+</div>
+  
 <!-- ============ HERO ============ -->
   <section class="hero" id="main-content">
     <!-- Tambahkan gambar transparan di sini -->
@@ -217,21 +233,5 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="js/main.js"></script>
 </body>
-
-  <!-- ============ SEARCH SECTION ============ -->
-<div class="search-container" data-aos="fade-up">
-  <div class="search-box">
-    <i class="fas fa-search search-icon" aria-hidden="true"></i>
-    <input 
-      type="text" 
-      id="searchInput" 
-      placeholder="Cari destinasi wisata, tempat bersejarah, kuliner..." 
-      autocomplete="off"
-    >
-    <button type="button" id="clearSearchBtn" class="clear-btn" aria-label="Hapus pencarian">
-      <i class="fas fa-times"></i>
-    </button>
-  </div>
-</div>
   
 </html>
