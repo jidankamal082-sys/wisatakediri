@@ -449,9 +449,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (activeBtn) activeBtn.focus();
 }
 
-modalClose.addEventListener('click', (e) => {
-  closeModal(e);
-});
+if (modalClose) {
+  modalClose.addEventListener('click', (e) => {
+    closeModal(e);
+  });
+}
    
   modalOverlay.addEventListener('click', (e) => {
     if (e.target === modalOverlay) closeModal();
