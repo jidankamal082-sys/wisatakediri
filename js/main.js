@@ -259,7 +259,6 @@ fetch('js/data-destinasi.json')
   AOS.refreshHard();
   }
     }
-  }
 
   /* --- Render Destinasi Cards --- */
   function renderDestinasi(destinations) {
