@@ -93,12 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-
-document.addEventListener('DOMContentLoaded', (() => {
+(() => {
   const searchInput = document.getElementById('searchInput');
-  const clearSearchBtn = document.getElementById('clearSearchBtn');
-  if (!searchInput) return;
-
+   
   // Buat wadah elemen dropdown saran jika belum ada
   let searchResults = document.getElementById('searchResults');
   if (!searchResults) {
