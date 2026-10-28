@@ -448,7 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (activeBtn) activeBtn.focus();
   }
 
-  modalClose.addEventListener('click', closeModal);
+  //
   modalOverlay.addEventListener('click', (e) => {
     if (e.target === modalOverlay) closeModal();
   });
@@ -585,15 +585,22 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target === welcomeOverlay) closeWelcome();
     });
   }
-  document.addEventListener('click', (e) => {
-    const detailBtn = e.target.closest('button[data-action="detail"], .btn-detail, a[href="#"], [onclick*="detail"]');
-    const closeBtn = e.target.closest('#modalClose, .modal-close, [onclick*="closeModal"]');
-    
-    if (detailBtn || closeBtn) {
-      e.preventDefault();
+  // ============ FIX AGAR TIDAK REFRESH SAAT MENUTUP MODAL ============
+document.addEventListener('click', (e) => {
+  const closeBtn = e.target.closest('#modalClose, .modal-close, [onclick*="closeModal"]');
+  if (closeBtn) {
+    e.preventDefault();
+    if (typeof closeModal === 'function') {
+      closeModal();
+    } else {
+      const modalOverlay = document.getElementById('modalOverlay');
+      if (modalOverlay) {
+        modalOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
     }
-  });
-
+  }
+});
   /* --- Spotlight: Jelajahi Sumber Mata Air button --- */
   const filterAirBtn = document.querySelector('[data-filter-air]');
   if (filterAirBtn) {
@@ -604,4 +611,5 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('destinasi').scrollIntoView({ behavior: 'smooth' });
     });
   }
+}
 });
