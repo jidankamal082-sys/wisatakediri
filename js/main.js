@@ -441,31 +441,34 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function closeModal(e) {
-  if (e) e.preventDefault();
-  const modalOverlay = document.getElementById('modalOverlay');
-  if (modalOverlay) {
-    modalOverlay.classList.remove('open');
+  if (e) {
+    e.preventDefault();
+  }
+  const modalEl = document.getElementById('modalOverlay');
+  if (modalEl) {
+    modalEl.classList.remove('open');
     document.body.style.overflow = '';
   }
-  const activeBtn = document.querySelector('.detail-btn:focus') || document.querySelector('.filter-btn');
-  if (activeBtn) activeBtn.focus();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const modalClose = document.getElementById('modalClose');
-  if (modalClose) {
-    modalClose.addEventListener('click', (e) => {
+  const closeBtn = document.getElementById('modalClose');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
       closeModal(e);
     });
   }
 
-  const modalOverlay = document.getElementById('modalOverlay');
-  if (modalOverlay) {
-    modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) closeModal(e);
+  const overlayEl = document.getElementById('modalOverlay');
+  if (overlayEl) {
+    overlayEl.addEventListener('click', (e) => {
+      if (e.target === overlayEl) {
+        closeModal(e);
+      }
     });
   }
 });
+   
    
   // Keyboard: Escape to close modal
   document.addEventListener('keydown', (e) => {
