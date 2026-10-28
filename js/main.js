@@ -440,13 +440,19 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => modalClose.focus(), 100);
   }
 
-  function closeModal() {
-    modalOverlay.classList.remove('open');
-    document.body.style.overflow = '';
-    // Return focus to the triggering element
-    const activeBtn = document.querySelector('.detail-btn:focus') || document.querySelector('.filter-btn.active');
-    if (activeBtn) activeBtn.focus();
-  }
+  function closeModal(e) {
+  if (e) e.preventDefault();
+  modalOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+  
+  const activeBtn = document.querySelector('.detail-btn:focus') || document.querySelector('.filter-btn');
+  if (activeBtn) activeBtn.focus();
+}
+
+modalClose.addEventListener('click', (e) => {
+  closeModal(e);
+});
+   
   modalOverlay.addEventListener('click', (e) => {
     if (e.target === modalOverlay) closeModal();
   });
