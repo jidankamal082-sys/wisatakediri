@@ -190,28 +190,34 @@ document.addEventListener('DOMContentLoaded', () => {
 });
              
   /* --- Fetch and render --- */
-  fetch('js/data-destinasi.json')
-    .then(res => {
-      if (!res.ok) throw new Error('Gagal memuat data');
-      return res.json();
-    })
-    .then(data => {
-      loadingState.style.display = 'none';
-      allDestinations = data.destinations || [];
+fetch('js/data-destinasi.json')
+  .then(res => {
+    if (!res.ok) throw new Error('Gagal memuat data');
+    return res.json();
+  })
+  .then(data => {
+    loadingState.style.display = 'none';
+    allDestinations = data.destinations || [];
 
-      renderKategori(data.categories);
-      renderDestinasi(allDestinations);
-      initMap(allDestinations);
-      initFilter();
-      initKategoriClick();
-    })
-    .catch(err => {
-      loadingState.innerHTML = `
-        <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
-        <p>Gagal memuat data destinasi. Silakan muat ulang halaman.</p>
-        <p style="font-size:0.8rem;margin-top:8px;color:var(--text-muted);">${err.message}</p>
-      `;
-    });
+    renderKategori(data.categories);
+    renderDestinasi(allDestinations);
+    initMap(allDestinations);
+    initFilter();
+    initKategoriClick();
+
+    // Failsafe: paksa elemen AOS tampil kalau animasi macet
+    setTimeout(() => {
+      document.querySelectorAll('[data-aos]').forEach(el => el.classList.add('aos-animate'));
+    }, 800);
+  })
+  .catch(err => {
+    console.error(err);
+    loadingState.innerHTML = `
+      <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+      <p>Gagal memuat data destinasi. Silakan muat ulang halaman.</p>
+      <p style="font-size:0.8rem;margin-top:8px;color:var(--text-muted);">${err.message}</p>
+    `;
+  });
 
   /* --- Render Kategori --- */
   function renderKategori(categories) {
