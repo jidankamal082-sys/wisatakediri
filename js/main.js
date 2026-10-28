@@ -247,8 +247,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }).join('');
 
     // Re-trigger AOS for new elements
-    if (typeof AOS !== 'undefined') {
-      AOS.refresh();
+  if (typeof AOS !== 'undefined') {
+  AOS.refreshHard();
+  }
     }
   }
 
@@ -311,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Re-trigger AOS
     if (typeof AOS !== 'undefined') {
-      AOS.refresh();
+  AOS.refreshHard();
     }
 
     // Attach detail button listeners
