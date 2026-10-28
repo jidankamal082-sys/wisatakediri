@@ -682,3 +682,15 @@ button { font-family: inherit; cursor: pointer; }
 .search-dropdown-item.empty:hover {
   background: transparent;
 }
+.welcome-icon {
+  width: auto;
+  height: auto;
+  background: none;
+  border-radius: 0;
+}
+.welcome-logo {
+  height: 84px;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+}
