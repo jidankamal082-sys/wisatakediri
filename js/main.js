@@ -442,23 +442,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function closeModal(e) {
   if (e) e.preventDefault();
-  modalOverlay.classList.remove('open');
-  document.body.style.overflow = '';
-  
+  const modalOverlay = document.getElementById('modalOverlay');
+  if (modalOverlay) {
+    modalOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
   const activeBtn = document.querySelector('.detail-btn:focus') || document.querySelector('.filter-btn');
   if (activeBtn) activeBtn.focus();
 }
 
-if (modalClose) {
-  modalClose.addEventListener('click', (e) => {
-    closeModal(e);
-  });
-}
-   
-  modalOverlay.addEventListener('click', (e) => {
-    if (e.target === modalOverlay) closeModal();
-  });
+document.addEventListener('DOMContentLoaded', () => {
+  const modalClose = document.getElementById('modalClose');
+  if (modalClose) {
+    modalClose.addEventListener('click', (e) => {
+      closeModal(e);
+    });
+  }
 
+  const modalOverlay = document.getElementById('modalOverlay');
+  if (modalOverlay) {
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) closeModal(e);
+    });
+  }
+});
+   
   // Keyboard: Escape to close modal
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modalOverlay.classList.contains('open')) {
