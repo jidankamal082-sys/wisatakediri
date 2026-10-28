@@ -125,11 +125,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const titleEl = card.querySelector('h3, h4, .title, .nama-tempat') || card;
       const titleText = titleEl.textContent.trim();
 
-      if (titleText.toLowerCase().includes(keyword)) {
-        matches.push({
-          title: titleText,
-          element: card
-        });
+      if (titleText.toLowerCase().includes(keyword) && !matches.some(m => m.title === titleText)) {
+  matches.push({
+    title: titleText,
+    element: card
+  });
       }
     });
 
