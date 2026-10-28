@@ -479,10 +479,10 @@ document.addEventListener('DOMContentLoaded', () => {
    
   // Keyboard: Escape to close modal
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modalOverlay.classList.contains('open')) {
-      closeModal();
-    }
-  });
+  if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('open')) {
+    closeModal();
+  }
+});
 
   // Trap focus inside modal
   modalOverlay.addEventListener('keydown', (e) => {
