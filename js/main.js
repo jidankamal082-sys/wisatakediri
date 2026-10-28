@@ -585,15 +585,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target === welcomeOverlay) closeWelcome();
     });
   }
-
-document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click', (e) => {
     const detailBtn = e.target.closest('button[data-action="detail"], .btn-detail, a[href="#"], [onclick*="detail"]');
-    if (detailBtn) {
+    const closeBtn = e.target.closest('#modalClose, .modal-close, [onclick*="closeModal"]');
+    
+    if (detailBtn || closeBtn) {
       e.preventDefault();
     }
   });
-});
+
   /* --- Spotlight: Jelajahi Sumber Mata Air button --- */
   const filterAirBtn = document.querySelector('[data-filter-air]');
   if (filterAirBtn) {
@@ -604,5 +604,4 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('destinasi').scrollIntoView({ behavior: 'smooth' });
     });
   }
-   
 });
