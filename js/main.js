@@ -123,7 +123,8 @@ document.addEventListener('DOMContentLoaded', (() => {
     }
 
     const cards = document.querySelectorAll('.destinasi-card');
-    cards.forEach(card => {
+      let matches = [];
+      cards.forEach(card => {
       const titleEl = card.querySelector('h3, h4, .title, .nama-tempat') || card;
       const titleText = titleEl.textContent.trim();
 
@@ -633,6 +634,5 @@ document.addEventListener('click', (e) => {
       if (airBtn) airBtn.click();
       document.getElementById('destinasi').scrollIntoView({ behavior: 'smooth' });
     });
-  }
 }
 });
