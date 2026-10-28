@@ -485,6 +485,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
   // Trap focus inside modal
+  if (modalOverlay) {
   modalOverlay.addEventListener('keydown', (e) => {
     if (e.key !== 'Tab' || !modalOverlay.classList.contains('open')) return;
     const focusable = modalOverlay.querySelectorAll('button, a, [tabindex]:not([tabindex="-1"])');
@@ -499,6 +500,7 @@ document.addEventListener('DOMContentLoaded', () => {
       first.focus();
     }
   });
+  }
 
   /* --- Map (Leaflet) --- */
   function initMap(destinations) {
