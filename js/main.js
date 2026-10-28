@@ -129,13 +129,13 @@ document.addEventListener('DOMContentLoaded', () => {
   matches.push({
     title: titleText,
     element: card
-  });
+        });
       }
     });
 
     if (matches.length > 0) {
       searchResults.style.display = 'block';
-      matches.forEach(item => {
+      matches.slice(0, 8).forEach(item => {
         const itemDiv = document.createElement('div');
         itemDiv.className = 'search-dropdown-item';
         itemDiv.textContent = item.title;
