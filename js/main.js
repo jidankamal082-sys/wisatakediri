@@ -447,8 +447,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const activeBtn = document.querySelector('.detail-btn:focus') || document.querySelector('.filter-btn.active');
     if (activeBtn) activeBtn.focus();
   }
-
-  //
   modalOverlay.addEventListener('click', (e) => {
     if (e.target === modalOverlay) closeModal();
   });
