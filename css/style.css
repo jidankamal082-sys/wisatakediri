@@ -636,3 +636,49 @@ button { font-family: inherit; cursor: pointer; }
   .welcome-modal h2 { font-size: 1.1rem; }
   .welcome-icon { width: 56px; height: 56px; font-size: 1.4rem; }
 }
+/* ===== Dropdown hasil pencarian ===== */
+.search-container {
+  position: relative;
+  z-index: 20;
+}
+.search-box {
+  position: relative;
+}
+.search-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-lg);
+  max-height: 280px;
+  overflow-y: auto;
+  z-index: 50;
+  text-align: left;
+}
+.search-dropdown-item {
+  padding: 12px 18px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--text);
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+}
+.search-dropdown-item:last-child {
+  border-bottom: none;
+}
+.search-dropdown-item:hover,
+.search-dropdown-item:active {
+  background: var(--navy-light);
+  color: var(--navy);
+}
+.search-dropdown-item.empty {
+  color: var(--text-muted);
+  cursor: default;
+}
+.search-dropdown-item.empty:hover {
+  background: transparent;
+}
