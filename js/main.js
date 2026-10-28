@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  if (clearSearchBtn) {
+    if (clearSearchBtn) {
     clearSearchBtn.addEventListener('click', () => {
       searchInput.value = '';
       searchResults.style.display = 'none';
@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
       searchInput.focus();
     });
   }
-});
+})();
              
   /* --- Fetch and render --- */
 fetch('js/data-destinasi.json')
