@@ -123,10 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Ambil semua kartu destinasi yang ada di halaman
-    const cards = document.querySelectorAll('.destinasi-card, .card, [class*="card"]');
-    let matches = [];
-
+    const cards = document.querySelectorAll('.destinasi-card');
     cards.forEach(card => {
       const titleEl = card.querySelector('h3, h4, .title, .nama-tempat') || card;
       const titleText = titleEl.textContent.trim();
