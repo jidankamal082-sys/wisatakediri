@@ -35,12 +35,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* --- Mobile nav toggle (R-32) --- */
+  if (navToggle && navMenu) {
   navToggle.addEventListener('click', () => {
     const isOpen = navMenu.classList.toggle('open');
     navToggle.classList.toggle('active');
     navToggle.setAttribute('aria-expanded', isOpen);
     navToggle.setAttribute('aria-label', isOpen ? 'Tutup menu navigasi' : 'Buka menu navigasi');
   });
+  }
 
   navMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
