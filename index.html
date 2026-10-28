@@ -2,6 +2,21 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
+  <script>
+  window.addEventListener('error', function (e) {
+    alert('JS error: ' + e.message + ' | baris ' + e.lineno);
+  });
+  window.addEventListener('unhandledrejection', function (e) {
+    alert('Promise error: ' + (e.reason && e.reason.message ? e.reason.message : e.reason));
+  });
+</script>
+<style>
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+</style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pariwisata Kabupaten Kediri - Pesona Wisata Kabupaten Kediri</title>
   <meta name="description" content="Portal wisata Kabupaten Kediri. Jelajahi destinasi religi, sumber mata air, sejarah, alam, event, dan kuliner khas Kediri." />
